@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import ReactTerminal from 'react-terminal-component';
 
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -35,6 +36,7 @@ const App = () =>
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
+
             <Layout darkMode={darkMode} setDarkMode={setDarkMode}/>
         </ThemeProvider>
     );
