@@ -2,7 +2,7 @@ import React from "react";
 
 import { Button, Container, Grid, Typography } from "@material-ui/core";
 
-const Layout = props =>
+const HomePage = props =>
 {
 	return (
 		<Container>
@@ -23,4 +23,4 @@ const Layout = props =>
 	)
 };
 
-export default Layout;
+export default HomePage;

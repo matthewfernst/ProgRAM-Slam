@@ -1,24 +1,22 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 
-import { TextField, Container, Grid, Paper } from "@material-ui/core";
+import { Container, Grid } from "@material-ui/core";
 
-const Layout = () =>
+import VideoPage from "./VideoPage";
+import HomePage from "./HomePage"
+
+const Layout = props =>
 {
+	const [showVideoPage, setShowVideoPage] = useState(true);
+
 	return (
 		<Container>
 			<Grid
-				container
-				direction={"column"}
-				justify={"center"}
-				alignContent={"center"}
-				alignItems={"center"}
-				spacing={2}
-				style={{height: "100vh"}}
+				container justify={"center"} alignItems={"center"} alignContent={"center"}
+				spacing={2} style={{height: "100vh"}}
 			>
 				<Grid item>
-					<Paper elevation={4}>
-						<TextField onChange={(e) => alert(e.target.value)} />
-					</Paper>
+					{showVideoPage ? <VideoPage setShowVideoPage={setShowVideoPage} {...props}/> : <HomePage {...props}/>}
 				</Grid>
 			</Grid>
 		</Container>

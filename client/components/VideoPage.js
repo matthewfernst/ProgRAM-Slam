@@ -1,26 +1,29 @@
-import React from "react";
+import React, {useEffect} from "react";
 
-import { Button, Container, Grid, Typography } from "@material-ui/core";
+import {Grid, Paper} from "@material-ui/core";
 
-const Layout = props =>
+const VideoPage = props =>
 {
+	useEffect(() => {
+
+		const onVideoEnd = (e) =>
+		{
+			props.setShowVideoPage(false);
+		}
+
+		document.getElementById('marketing-video').addEventListener('ended', onVideoEnd,false);
+	});
+
 	return (
-		<Container>
+		<Paper elevation={4} style={{width: '75vw', height: '75vh'}}>
 			<Grid
-				container
-				direction={"column"}
-				justify={"center"}
-				alignContent={"center"}
-				alignItems={"center"}
-				spacing={2}
-				style={{height: "100vh"}}
+				container justify={"center"} alignItems={"center"} alignContent={"center"}
+				style={{height: "100%"}}
 			>
-				<Grid item>
-					<Typography variant={"h2"}>Hello World!</Typography>
-				</Grid>
+				<p id={"marketing-video"}>Insert Video Here</p>
 			</Grid>
-		</Container>
+		</Paper>
 	)
 };
 
-export default Layout;
+export default VideoPage;
