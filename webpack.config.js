@@ -29,7 +29,7 @@ module.exports = {
 						{ loader: 'sass-loader' }
 					]
 			},
-			{test: /\.(png|svg|jpe?g|gif|mov)$/i, loader: ['file-loader']}
+			{test: /\.(png|svg|jpe?g|gif|mp4)$/i, loader: ['file-loader']}
 		]
 	},
 	plugins: [
