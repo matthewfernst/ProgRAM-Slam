@@ -1,8 +1,8 @@
 import React from "react";
 
-import { TextField, Container, Grid, Paper } from "@material-ui/core";
+import { Button, Container, Grid, Typography } from "@material-ui/core";
 
-const Layout = () =>
+const Layout = props =>
 {
 	return (
 		<Container>
@@ -16,9 +16,7 @@ const Layout = () =>
 				style={{height: "100vh"}}
 			>
 				<Grid item>
-					<Paper elevation={4}>
-						<TextField onChange={(e) => alert(e.target.value)} />
-					</Paper>
+					<Typography variant={"h2"}>Hello World!</Typography>
 				</Grid>
 			</Grid>
 		</Container>
