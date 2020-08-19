@@ -1,14 +1,9 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 
-import { Container, Grid } from "@material-ui/core";
-
-import VideoPage from "./VideoPage";
-import HomePage from "./HomePage"
+import { Box, Container, Grid, Typography } from "@material-ui/core";
 
 const Layout = props =>
 {
-	const [showVideoPage, setShowVideoPage] = useState(true);
-
 	return (
 		<Container>
 			<Grid
@@ -16,7 +11,7 @@ const Layout = props =>
 				spacing={2} style={{height: "100vh"}}
 			>
 				<Grid item>
-					{showVideoPage ? <VideoPage setShowVideoPage={setShowVideoPage} {...props}/> : <HomePage {...props}/>}
+					<Typography>asd</Typography>
 				</Grid>
 			</Grid>
 		</Container>

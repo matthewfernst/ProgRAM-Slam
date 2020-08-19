@@ -4,17 +4,9 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-import { SnackbarProvider, useSnackbar } from 'notistack';
-
 import Layout from "./Layout";
 
-const LoadApp = props =>
-{
-    const { enqueueSnackbar } = useSnackbar();
-    const produceSnackBar = (message, variant="error") => enqueueSnackbar(message, { variant: variant });
-
-    return <Layout produceSnackBar={produceSnackBar} {...props}/>;
-};
+import ClaconFont from '../static/fonts/clacon.ttf';
 
 const App = () =>
 {
@@ -25,6 +17,16 @@ const App = () =>
             createMuiTheme({
                 palette: {
                     type: darkMode ? 'dark' : 'light',
+                    primary: { main: '#C8C372' },
+                    secondary: { main: '#1E4D2B' },
+                },
+                typography: { fontFamily: 'Clacon' },
+                overrides: {
+                    MuiCssBaseline: {
+                        '@global': {
+                            '@font-face': [{ fontFamily: 'Clacon', src: `url(${ClaconFont}) format('woff2')`}]
+                        }
+                    }
                 },
             }),
         [darkMode],
@@ -33,9 +35,7 @@ const App = () =>
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <SnackbarProvider maxSnack={3} preventDuplicate>
-                <LoadApp darkMode={darkMode} setDarkMode={setDarkMode}/>
-            </SnackbarProvider>
+            <Layout darkMode={darkMode} setDarkMode={setDarkMode}/>
         </ThemeProvider>
     );
 };
