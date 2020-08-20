@@ -1,5 +1,7 @@
 import React, {useEffect} from 'react';
 
+import {Box} from "@material-ui/core";
+
 import ReactTerminal  from 'react-terminal-component';
 import {FileSystem, CommandMapping, defaultCommandMapping, EmulatorState, OutputFactory } from 'javascript-terminal';
 
@@ -85,22 +87,22 @@ const Terminal = props =>
 	});
 
 	return (
-		<ReactTerminal
-			theme={{
-				background: props.darkMode ? '#141313' : '#FCFCFC',
-				promptSymbolColor: props.darkMode ? '#08EC19' : '#0661FF',
-				commandColor: props.darkMode ? '#FCFCFC' : '#141313',
-				outputColor: props.darkMode ? '#FCFCFC' : '#141313',
-				errorOutputColor: '#ff0606',
-				spacing: '2%',
-				width: '100%',
-				height: '100vh'
-			}}
-			promptSymbol={"cam@event-name-here:$"}
-			clickToFocus={true}
-			emulatorState={customState}
-		/>
-
+		<Box p={4}>
+			<ReactTerminal
+				theme={{
+					background: props.darkMode ? '#141313' : '#FCFCFC',
+					promptSymbolColor: props.darkMode ? '#08EC19' : '#0661FF',
+					commandColor: props.darkMode ? '#FCFCFC' : '#141313',
+					outputColor: props.darkMode ? '#FCFCFC' : '#141313',
+					errorOutputColor: '#ff0606',
+					width: '100%',
+					height: '92vh'
+				}}
+				promptSymbol={"cam@event-name-here:$"}
+				clickToFocus={true}
+				emulatorState={customState}
+			/>
+		</Box>
 	);
 };
 
