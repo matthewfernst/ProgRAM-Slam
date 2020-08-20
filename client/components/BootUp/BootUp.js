@@ -2,9 +2,6 @@ import React, {useState} from "react";
 
 import { Container, Grid } from "@material-ui/core";
 
-import VideoPage from "./VideoPage";
-import HomePage from "./HomePage"
-
 const BootUp = props =>
 {
 	const [showVideoPage, setShowVideoPage] = useState(true);

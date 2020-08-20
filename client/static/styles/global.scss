@@ -1,10 +1,19 @@
 
+@font-face {
+  font-family: 'Clacon';
+  font-style: normal;
+  src: url("../fonts/clacon.ttf") format('truetype');
+}
+
 html, #root {
 
   div {
     overflow-y: hidden;
   }
 
-  background-color: #101010;
-  color: #FFFFFF;
+  * {
+    font-family: 'Clacon', serif !important;
+    font-size: 22px;
+  }
 }
+

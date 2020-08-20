@@ -1,46 +1,20 @@
-import React, {useState} from 'react';
+import React, {useEffect} from 'react';
 
-import ReactTerminal, { ReactOutputRenderers,  } from 'react-terminal-component';
-import {
-	CommandMapping,
-	defaultCommandMapping,
-	EmulatorState,
-	OutputFactory,
-} from 'javascript-terminal';
-import gusVid from '../../static/videos/gus.mp4';
-import {aByteSizeCodingCompetition, csuLogo} from "./ASCIIArt";
+import ReactTerminal  from 'react-terminal-component';
+import {CommandMapping, defaultCommandMapping, EmulatorState, OutputFactory } from 'javascript-terminal';
 
-const PAPER_TYPE = 'paper';
-
-const paperStyles = {
-	backgroundColor: 'white',
-	color: 'black',
-	fontFamily: 'sans-serif',
-	padding: '1em',
-	margin: '1em 0',
-	borderRadius: '0.2em'
-};
-
-const PaperOutput = ({ content }) => (
-	<div style={paperStyles}>
-		<h1>{content.title}</h1>
-
-		{content.body}
-	</div>
-);
-
-const createPaperRecord = (title, body) => {
-	return new OutputFactory.OutputRecord({
-		type: PAPER_TYPE,
-		content: {
-			title,
-			body
-		}
-	});
-};
+import { aByteSizeCodingCompetition } from "./ASCIIArt";
 
 const Terminal = props =>
 {
+	useEffect(() =>
+	{
+		for (let form of document.getElementsByTagName("FORM"))
+		{
+			form.setAttribute("spellcheck", "false")
+		}
+	});
+
 	const customState = EmulatorState.create({
 		'commandMapping': CommandMapping.create({
 			...defaultCommandMapping,
@@ -51,7 +25,6 @@ const Terminal = props =>
 					return { output: OutputFactory.makeTextOutput('success') };
 				},
 				'optDef': {}
-
 			},
 			'slogan': {
 				'function': (state, opts) =>
@@ -59,7 +32,6 @@ const Terminal = props =>
 					return { output: OutputFactory.makeTextOutput(csuLogo + '\n\n' + aByteSizeCodingCompetition) };
 				},
 				'optDef': {}
-
 			},
 			'markvid': {
 				'function': (state, opts) => {
@@ -74,8 +46,6 @@ const Terminal = props =>
 				'optDef': {}
 
 			},
-
-
 		})
 	});
 
@@ -88,12 +58,10 @@ const Terminal = props =>
 				outputColor: props.darkMode ? '#08EC19' : '#141313',
 				errorOutputColor: '#ff0606',
 				fontSize: '1.1rem',
-				spacing: '1%',
-				fontFamily: 'monospace',
+				spacing: '2%',
 				width: '100%',
 				height: '100vh'
 			}}
-			outputRenderers={{...ReactOutputRenderers, [PAPER_TYPE]: PaperOutput}}
 			emulatorState={customState}
 		/>
 
