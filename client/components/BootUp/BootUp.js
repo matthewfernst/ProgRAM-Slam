@@ -125,7 +125,7 @@ const SystemInfo = props =>
 								Device Name:
 							</Grid>
 							<Grid item>
-								Event Name Here
+								ProgRAM Slam
 							</Grid>
 						</Grid>
 					</Box>

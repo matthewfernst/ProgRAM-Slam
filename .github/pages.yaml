@@ -1,0 +1,34 @@
+name: Build and Deploy to Pages
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+
+  build-and-deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - name: "Install Node Modules"
+        run: npm install
+
+      - name: "Build Site"
+        run: npm run build
+
+      - name: "Deploy Site"
+        uses: cpina/github-action-push-to-another-repository@master
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN }}
+        with:
+          source-directory: 'dist'
+          destination-github-username: 'mrrosoff'
+          destination-repository-name: 'ProgRAM-Slam-Website-Pages'
+          user-email: maxrosoff1@gmail.com

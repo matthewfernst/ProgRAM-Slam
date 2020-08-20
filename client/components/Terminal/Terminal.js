@@ -98,7 +98,7 @@ const Terminal = props =>
 					width: '100%',
 					height: '92vh'
 				}}
-				promptSymbol={"cam@event-name-here:$"}
+				promptSymbol={"cam@ProgRAM-Slam:$"}
 				clickToFocus={true}
 				emulatorState={customState}
 			/>
