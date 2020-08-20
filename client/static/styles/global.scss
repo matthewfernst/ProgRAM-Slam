@@ -1,5 +1,10 @@
 
 html, #root {
+
+  div {
+    overflow-y: hidden;
+  }
+
   background-color: #101010;
   color: #FFFFFF;
 }
