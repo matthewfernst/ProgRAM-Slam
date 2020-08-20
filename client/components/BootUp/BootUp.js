@@ -7,6 +7,7 @@ import ReactAudioPlayer from "react-audio-player";
 import CSULogo from "../../static/images/CSU-Logo.png";
 import AppleStartUp from "../../static/sounds/Apple-Startup.wav";
 
+const successStyle = { color: '#08EC19'}
 const BootUp = props =>
 {
 	const [state, setState] = useState(0);
@@ -52,7 +53,11 @@ const BootUp = props =>
 						</Grid> : null }
 					{ state >= 14 ?
 						<Grid item>
-							Initializing OS . . . . . . SUCCESS
+							<header>
+								<> Initializing OS . . . . . .
+									<span style={ successStyle }> SUCCESS </span>
+								</>
+							</header>
 						</Grid> : null }
 					{ state >= 15 ?
 						<Grid item>
@@ -155,11 +160,19 @@ const DriveInfo = props =>
 		<Grid container direction={"column"} spacing={1}>
 			{ props.state >= 12 ?
 				<Grid item>
-					Detecting Primary Drive (C) . . . . . . SUCCESS
+					<header>
+						<> Detecting Primary Drive (C) . . . . . .
+							<span style={ successStyle }> SUCCESS </span>
+						</>
+					</header>
 				</Grid> : null }
 			{ props.state >= 13 ?
 				<Grid item>
-					Detecting Secondary Drive (D) . . . . . . SUCCESS
+					<header>
+						<> Detecting Secondary Drive (D) . . . . . .
+							<span style={ successStyle }> SUCCESS </span>
+						</>
+					</header>
 				</Grid> : null }
 		</Grid>
 	);
