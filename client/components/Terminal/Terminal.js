@@ -9,6 +9,12 @@ import {files} from "./FileSystem";
 import {aByteSizeCodingCompetition, csuLogo} from "./ASCIIArt";
 
 import gusVideo from "../../static/videos/gus.mp4"
+import CSULogo from "../../static/images/CSU-Logo.png";
+
+function OpenInNewTab(url) {
+	var win = window.open(url, '_blank');
+	win.focus();
+}
 
 const Terminal = props =>
 {
@@ -69,6 +75,16 @@ const Terminal = props =>
 				},
 				'optDef': {}
 			},
+
+			'discord': {
+				'function': (state, opts) => {
+						var win = window.open('https://discord.gg/DyTfs2B', '_blank');
+						win.focus();
+						return { };
+				},
+				'optDef': {}
+			},
+
 			'help': {
 				'function': (state, opts) => {
 					let input = opts.toString()
@@ -128,7 +144,7 @@ const Terminal = props =>
 					}
 				},
 				'optDef': {}
-			},
+			}
 		})
 	});
 
