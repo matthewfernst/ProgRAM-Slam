@@ -16638,7 +16638,7 @@ return /******/ (function(modules) { // webpackBootstrap
       /***/
       function (module, exports, __webpack_require__) {
         module.exports = __webpack_require__(
-        /*! /home/mrosoff/WebstormProjects/ProgRAM-Slam-Website/react-terminal-component/javascript-terminal/src/index.js */
+        /*! /Users/matthewernst/WebstormProjects/Event-Name-Site/react-terminal-component/javascript-terminal/src/index.js */
         "./src/index.js");
         /***/
       }
@@ -24252,7 +24252,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/mrosoff/WebstormProjects/ProgRAM-Slam-Website/react-terminal-component/src/index.js */"./src/index.js");
+module.exports = __webpack_require__(/*! /Users/matthewernst/WebstormProjects/Event-Name-Site/react-terminal-component/src/index.js */"./src/index.js");
 
 
 /***/ })
