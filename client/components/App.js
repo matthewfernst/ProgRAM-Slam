@@ -27,7 +27,10 @@ const App = () =>
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            {bootingUp ? <BootUp setBootingUp={setBootingUp}/> : <Terminal darkMode={darkMode} setDarkMode={setDarkMode}/>}
+            {bootingUp ? <BootUp setBootingUp={setBootingUp} darkMode={darkMode}/> : <Terminal darkMode={darkMode} setDarkMode={setDarkMode}/>}
+            <div style={{position: "absolute", bottom: 10, right: 10, fontSize: 12}}>
+                Created By <a href={"https://github.com/mrrosoff"} target="_blank" style={{color: darkMode ? '#FCFCFC' : "#141313", fontSize: 12}}>Max Rosoff</a> and <a href={"https://github.com/matthewfernst"} target="_blank" style={{color: darkMode ? '#FCFCFC' : "#141313", fontSize: 12}}>Matthew Ernst</a>
+            </div>
         </ThemeProvider>
     );
 };

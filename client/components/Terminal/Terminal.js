@@ -56,7 +56,7 @@ const Terminal = props =>
 							},
 							'optDef': {}
 						},
-						
+
 			'alternate': {
 				'function': (state, opts) => {
 
@@ -67,7 +67,6 @@ const Terminal = props =>
 				},
 				'optDef': {}
 			},
-
 			'help': {
 				'function': (state, opts) => {
 					return {
@@ -81,25 +80,24 @@ const Terminal = props =>
 
 				},
 				'optDef': {}
-
 			},
-
 		})
 	});
 
 	return (
 		<ReactTerminal
 			theme={{
-				background: props.darkMode ? '#141313' : '#fcfcfc',
+				background: props.darkMode ? '#141313' : '#FCFCFC',
 				promptSymbolColor: props.darkMode ? '#08EC19' : '#0661FF',
-				commandColor: props.darkMode ? '#fcfcfc' : '#141313',
-				outputColor: props.darkMode ? '#08EC19' : '#141313',
+				commandColor: props.darkMode ? '#FCFCFC' : '#141313',
+				outputColor: props.darkMode ? '#FCFCFC' : '#141313',
 				errorOutputColor: '#ff0606',
 				spacing: '2%',
 				width: '100%',
 				height: '100vh'
 			}}
 			promptSymbol={"cam@event-name-here:$"}
+			clickToFocus={true}
 			emulatorState={customState}
 		/>
 

@@ -7,7 +7,6 @@ import ReactAudioPlayer from "react-audio-player";
 import CSULogo from "../../static/images/CSU-Logo.png";
 import AppleStartUp from "../../static/sounds/Apple-Startup.wav";
 
-const successStyle = { color: '#08EC19'}
 const BootUp = props =>
 {
 	const [state, setState] = useState(0);
@@ -16,19 +15,22 @@ const BootUp = props =>
 	{
 		setTimeout(() => setState(1), 300)
 		setTimeout(() => setState(2), 500)
-		setTimeout(() => setState(3), 1000)
-		setTimeout(() => setState(4), 1500)
-		setTimeout(() => setState(5), 2000)
-		setTimeout(() => setState(6), 2100)
-		setTimeout(() => setState(7), 2200)
-		setTimeout(() => setState(8), 2300)
-		setTimeout(() => setState(9), 2400)
-		setTimeout(() => setState(10), 2500)
-		setTimeout(() => setState(11), 3200)
-		setTimeout(() => setState(12), 4200)
-		setTimeout(() => setState(13), 5000)
-		setTimeout(() => setState(14), 5200)
-		setTimeout(() => setState(15), 5500)
+		setTimeout(() => setState(3), 8000)
+		setTimeout(() => setState(4), 1200)
+		setTimeout(() => setState(5), 1500)
+		setTimeout(() => setState(6), 1600)
+		setTimeout(() => setState(7), 1700)
+		setTimeout(() => setState(8), 1800)
+		setTimeout(() => setState(9), 1900)
+		setTimeout(() => setState(10), 2100)
+		setTimeout(() => setState(11), 2400)
+		setTimeout(() => setState(12), 3000)
+		setTimeout(() => setState(13), 3500)
+		setTimeout(() => setState(14), 4000)
+		setTimeout(() => setState(15), 4500)
+		setTimeout(() => setState(16), 5000)
+		setTimeout(() => setState(17), 5500)
+		setTimeout(() => setState(18), 5800)
 		setTimeout(() => props.setBootingUp(false), 8000)
 	}, []);
 
@@ -37,11 +39,11 @@ const BootUp = props =>
 			<Box p={4}>
 				<Grid container direction={"column"} spacing={4}>
 					<Grid item>
-						<HeaderAndReleaseData />
+						<HeaderAndReleaseData {...props} />
 					</Grid>
 					{ state >= 1 ?
 						<Grid item>
-							Text
+							AF6S7V89 - JUC84X
 						</Grid> : null }
 					{ state >= 2 ?
 						<Grid item>
@@ -51,21 +53,21 @@ const BootUp = props =>
 						<Grid item>
 							<DriveInfo state={state} />
 						</Grid> : null }
-					{ state >= 14 ?
+					{ state >= 16 ?
 						<Grid item>
 							<header>
 								<> Initializing OS . . . . . .
-									<span style={ successStyle }> SUCCESS </span>
+									{ state >= 17 ? <span style={{color: '#08EC19'}}> SUCCESS </span> : null }
 								</>
 							</header>
 						</Grid> : null }
-					{ state >= 15 ?
+					{ state >= 18 ?
 						<Grid item>
 							Starting Computer . . .
 						</Grid> : null }
 				</Grid>
 			</Box>
-			{state >= 15 ? <ReactAudioPlayer src={AppleStartUp} autoPlay={true} controls={false}/> : null}
+			{state >= 18 ? <ReactAudioPlayer src={AppleStartUp} autoPlay={true} controls={false}/> : null}
 		</>
 	);
 };
@@ -80,20 +82,17 @@ const HeaderAndReleaseData = props =>
 			<Grid item>
 				<Grid container justify={"center"} alignContent={"center"} alignItems={"center"} direction={"column"} style={{height: '100%'}}>
 					<Grid item>
-						Cam Open Source OS
-					</Grid>
-					<Grid item>
-						Test
+						CAM OS (BETA PROGRAM)
 					</Grid>
 				</Grid>
 			</Grid>
 			<Grid item>
 				<Grid container justify={"center"} direction={"column"} style={{height: '100%'}}>
 					<Grid item>
-						Cam Open Source OS
+						Released: Aug 20, 2020 (BETA 1.1.12)
 					</Grid>
 					<Grid item>
-						Test
+						<a href={"https://github.com/mrrosoff/Event-Name-Site"} target="_blank" style={{color: props.darkMode ? '#FCFCFC' : "#141313", fontSize: 22}}>Open Source</a>
 					</Grid>
 				</Grid>
 			</Grid>
@@ -162,15 +161,15 @@ const DriveInfo = props =>
 				<Grid item>
 					<header>
 						<> Detecting Primary Drive (C) . . . . . .
-							<span style={ successStyle }> SUCCESS </span>
+							{ props.state >= 13 ? <span style={{color: '#08EC19'}}> SUCCESS </span> : null }
 						</>
 					</header>
 				</Grid> : null }
-			{ props.state >= 13 ?
+			{ props.state >= 14 ?
 				<Grid item>
 					<header>
 						<> Detecting Secondary Drive (D) . . . . . .
-							<span style={ successStyle }> SUCCESS </span>
+							{ props.state >= 15 ?  <span style={ {color: '#08EC19'}}> SUCCESS </span> : null }
 						</>
 					</header>
 				</Grid> : null }
