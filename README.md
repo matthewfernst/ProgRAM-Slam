@@ -11,8 +11,8 @@ The site comes bundled with the following technology.
 
 ### Client
 
-The site utilizes the newest React syntax for the base code. Use `client/components/Layout.js` as a starting point for 
-your site. App.js has built in error handling, call the method `props.produceSnackbar` from anywhere in `Layout.js`.
+The site utilizes the newest React syntax for the base code. Use `client/components/Terminal.js` as a starting point for 
+your site. App.js has built in error handling, call the method `props.produceSnackbar` from anywhere in `Terminal.js`.
 
 Styles can be used inline or within the SCSS file found under `client/static/styles/global.scss`. The file is imported 
 in `client/index.js`, if you wish to add more SCSS files, simply import them there.
