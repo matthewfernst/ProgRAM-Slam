@@ -1,29 +1,54 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 
-import { Container, Grid } from "@material-ui/core";
+const startupSequence =
+	{
+		1: ["Beginning Startup Sequence"],
+		2: ["Beginning Startup Sequence."],
+		3: ["Beginning Startup Sequence.."],
+		4: ["Beginning Startup Sequence..."],
+		5: ["Beginning Startup Sequence...", "Activating Computer"],
+	};
 
 const BootUp = props =>
 {
+	const [textArray, setTextArray] = useState(startupSequence['1']);
+
 	useEffect(() =>
 	{
 		setTimeout(() =>
 		{
-			props.setBootingUp(false);
+			setTextArray(startupSequence['2'])
+		}, 1000)
+
+		setTimeout(() =>
+		{
+			setTextArray(startupSequence['3'])
+		}, 2000)
+
+		setTimeout(() =>
+		{
+			setTextArray(startupSequence['4'])
 		}, 3000)
-	});
+
+		setTimeout(() =>
+		{
+			setTextArray(startupSequence['5'])
+		}, 3500)
+
+		setTimeout(() =>
+		{
+			props.setBootingUp(false);
+		}, 6000)
+	}, []);
 
 	return (
-		<Container>
-			<Grid
-				container justify={"center"} alignItems={"center"} alignContent={"center"}
-				spacing={2} style={{height: "100vh"}}
-			>
-				<Grid item>
-					Booting Up...
-				</Grid>
-			</Grid>
-		</Container>
-	)
+		<div style={{position: 'absolute', top: 10, left: 30}}>
+			{textArray.map(textElement =>
+			{
+				return <p>{textElement}</p>;
+			})}
+		</div>
+	);
 };
 
 export default BootUp;
