@@ -25,7 +25,7 @@ export const files = {
 	'/Documents/links/createATeam.txt': { content: 'https://forms.gle/8m8xvsUXprkLKBAw9'},
 	'/Documents/links/lookingForTeam.txt': { content: 'https://forms.gle/CdrxdbpreFUHerZWA'},
 	'/Documents/videos': {},
-	'/Documents/videos/whatIsCodeAThon.mov': { content: 'End of nested directory!'},
+	'/Documents/videos/whatIsProgRAMSlam.mov': { content: 'Coming Soon!'},
 	'/Documents/videos/doNotWatch.mp4': { content: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'},
 	'/Desktop/diary': {},
 	'/Desktop/diary/entryOne.txt': {
