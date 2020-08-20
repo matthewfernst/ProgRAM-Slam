@@ -121,8 +121,10 @@ const BootUp = props =>
 				<ReactAudioPlayer
 					src={AppleStartUp}
 					autoPlay = {true}
+					controls = {false}
 				/>
 				: null }
+
 		</>
 	);
 };
