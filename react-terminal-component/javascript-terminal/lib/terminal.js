@@ -11213,13 +11213,28 @@ var fileToImageOutput = function fileToImageOutput(fs, filePath) {
     return OutputFactory.makeErrorOutput(err);
   }
 
-  return OutputFactory.makeTextOutput(_react["default"].createElement("img", {
+  var jsxElement = _react["default"].createElement("img", {
     src: file.get('content'),
     style: {
       width: "auto",
-      height: 400
+      height: 360,
+      padding: 10
     }
-  }));
+  });
+
+  if (filePath.match(new RegExp('\.(mov|mp4)$', 'g'))) {
+    jsxElement = _react["default"].createElement("iframe", {
+      width: "640",
+      height: "360",
+      frameBorder: "0",
+      src: file.get('content'),
+      style: {
+        padding: 10
+      }
+    });
+  }
+
+  return OutputFactory.makeTextOutput(jsxElement);
 };
 
 var optDef = {};
@@ -11233,7 +11248,7 @@ var _default = function _default(state, commandOptions) {
     return {};
   }
 
-  var regex = new RegExp('\.(png|jpe?g)$', 'g');
+  var regex = new RegExp('\.(png|jpe?g|mov|mp4)$', 'g');
   var filePaths = argv.map(function (pathArg) {
     return (0, _util.resolvePath)(state, pathArg);
   }).filter(function (item) {

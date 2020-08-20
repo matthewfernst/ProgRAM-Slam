@@ -8,8 +8,6 @@ import {FileSystem, CommandMapping, defaultCommandMapping, EmulatorState, Output
 import {files} from "./FileSystem";
 import {aByteSizeCodingCompetition} from "./ASCIIArt";
 
-import gusVideo from "../../static/videos/gus.mp4"
-
 const Terminal = props =>
 {
 	useEffect(() =>
@@ -46,29 +44,16 @@ const Terminal = props =>
 				},
 				'optDef': {}
 			},
-			'markvid': {
-				'function': (state, opts) => {
-
-					return {
-						output: OutputFactory.makeTextOutput(<video width="100%" height="85%" controls>
-							<source src={gusVideo} type="video/mp4"/>
-						</video>)
-					};
-
-				},
-				'optDef': {}
-			},
 			'alternate': {
-				'function': (state, opts) => {
-					return {
-						output: OutputFactory.makeTextOutput("Let's get Crack-a-Hacking!")
-					};
+				'function': (state, opts) =>
+				{
+					return { output: OutputFactory.makeTextOutput("Let's get Crack-a-Hacking!") };
 				},
 				'optDef': {}
 			},
-
 			'discord': {
-				'function': (state, opts) => {
+				'function': (state, opts) =>
+				{
 					let win = window.open('https://discord.gg/DyTfs2B', '_blank');
 					win.focus();
 					return {};
@@ -76,16 +61,17 @@ const Terminal = props =>
 				'optDef': {}
 			},
 			'help': {
-				'function': (state, opts) => {
+				'function': (state, opts) =>
+				{
 					return {
 						output: OutputFactory.makeTextOutput(
 							'Welcome to Help!' + '\n' + '\n' +
-							"Some Basic Commands" + '\n' +
+							"Some Basic Commands" + '\n' + '\n' +
 							'cat: Read A File ' + '\n' +
+							'display: Display A Media Link' + '\n' +
 							'cd: Change Directory' + '\n' +
-							'ls: List Files' + '\n' +
-							'\n' +
-							'For more info, try typing \"man [command]\"'
+							'ls: List Files' + '\n' + '\n' +
+							'For More Information, Try \"man [command]\"'
 						)
 					};
 				},
@@ -93,8 +79,10 @@ const Terminal = props =>
 			},
 			'man': {
 				'function': (state, opts) => {
+
 					let input = opts.toString()
-					if (input === 'cat'){
+					if (input === 'cat')
+					{
 						return {
 							output: OutputFactory.makeTextOutput('NAME\n' +
 								'     cat -- concatenate and print files\n' +
@@ -107,7 +95,9 @@ const Terminal = props =>
 								'     output.')
 						};
 					}
-					else if (input === 'cd'){
+
+					else if (input === 'cd')
+					{
 						return {
 							output: OutputFactory.makeTextOutput('NAME\n' +
 								'    cd - Change the shell working directory.\n' +
@@ -119,7 +109,9 @@ const Terminal = props =>
 								'    Change the shell working directory.')
 						};
 					}
-					else if (input === 'ls'){
+
+					else if (input === 'ls')
+					{
 						return {
 							output: OutputFactory.makeTextOutput('NAME\n' +
 								'     ls -- list directory contents\n' +

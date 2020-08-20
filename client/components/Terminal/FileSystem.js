@@ -26,7 +26,7 @@ export const files = {
 	'/Documents/links/lookingForTeam.txt': { content: 'https://forms.gle/CdrxdbpreFUHerZWA'},
 	'/Documents/videos': {},
 	'/Documents/videos/whatIsProgRAMSlam.mov': { content: 'Coming Soon!'},
-	'/Documents/videos/doNotWatch.mp4': { content: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'},
+	'/Documents/videos/doNotWatch.mp4': { content: "https://www.youtube.com/embed/dQw4w9WgXcQ?&autoplay=1"},
 	'/Desktop/diary': {},
 	'/Desktop/diary/entryOne.txt': {
 		content: 'Day 1: I have been trapped in this simulation for an entire day now.' + '\n' +

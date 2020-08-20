@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -22,6 +22,11 @@ const App = () =>
             }),
         [darkMode],
     );
+
+    useEffect(() =>
+    {
+        document.getElementById("root").style.backgroundColor = darkMode ? "#141313" : "#FCFCFC";
+    }, [darkMode])
 
 
     return (
