@@ -1,9 +1,12 @@
 import React, {useEffect} from 'react';
 
 import ReactTerminal  from 'react-terminal-component';
-import {CommandMapping, defaultCommandMapping, EmulatorState, OutputFactory } from 'javascript-terminal';
+import {FileSystem, CommandMapping, defaultCommandMapping, EmulatorState, OutputFactory } from 'javascript-terminal';
 
-import { aByteSizeCodingCompetition } from "./ASCIIArt";
+import {files} from "./FileSystem";
+import {aByteSizeCodingCompetition, csuLogo} from "./ASCIIArt";
+
+import gusVideo from "../../static/videos/gus.mp4"
 
 const Terminal = props =>
 {
@@ -16,8 +19,16 @@ const Terminal = props =>
 	});
 
 	const customState = EmulatorState.create({
+		'fs': FileSystem.create(files),
 		'commandMapping': CommandMapping.create({
 			...defaultCommandMapping,
+			'exit': {
+				'function': (state, opts) =>
+				{
+					close();
+				},
+				'optDef': {}
+			},
 			'davemd': {
 				'function': (state, opts) =>
 				{
@@ -38,13 +49,12 @@ const Terminal = props =>
 
 					return {
 						output: OutputFactory.makeTextOutput(<video width="100%" height="85%" controls>
-							<source src={gusVid} type="video/mp4"/>
+							<source src={gusVideo} type="video/mp4"/>
 						</video>)
 					};
 
 				},
 				'optDef': {}
-
 			},
 		})
 	});
@@ -57,11 +67,11 @@ const Terminal = props =>
 				commandColor: props.darkMode ? '#fcfcfc' : '#141313',
 				outputColor: props.darkMode ? '#08EC19' : '#141313',
 				errorOutputColor: '#ff0606',
-				fontSize: '1.1rem',
 				spacing: '2%',
 				width: '100%',
 				height: '100vh'
 			}}
+			promptSymbol={"cam@event-name-here:$"}
 			emulatorState={customState}
 		/>
 
