@@ -24,8 +24,8 @@ const BootUp = props =>
 		setTimeout(() => setState(8), 2300)
 		setTimeout(() => setState(9), 2400)
 		setTimeout(() => setState(10), 2500)
-		setTimeout(() => setState(11), 3500)
-		setTimeout(() => setState(12), 4500)
+		setTimeout(() => setState(11), 3200)
+		setTimeout(() => setState(12), 4200)
 		setTimeout(() => setState(13), 5000)
 		setTimeout(() => setState(14), 5200)
 		setTimeout(() => setState(15), 5500)
@@ -65,7 +65,7 @@ const BootUp = props =>
 						</Grid> : null }
 				</Grid>
 			</Box>
-			{state >= 4 ? <ReactAudioPlayer src={AppleStartUp} autoPlay={true} controls={false}/> : null}
+			{state >= 15 ? <ReactAudioPlayer src={AppleStartUp} autoPlay={true} controls={false}/> : null}
 		</>
 	);
 };
