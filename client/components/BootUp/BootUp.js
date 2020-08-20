@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-
+import ReactAudioPlayer from 'react-audio-player';
 const startupSequence =
 	{
 		1: ["Beginning Startup Sequence"],
@@ -12,7 +12,7 @@ const startupSequence =
 const BootUp = props =>
 {
 	const [textArray, setTextArray] = useState(startupSequence['1']);
-
+	const [startup, setStartup] = useState(false)
 	useEffect(() =>
 	{
 		setTimeout(() =>
@@ -32,22 +32,32 @@ const BootUp = props =>
 
 		setTimeout(() =>
 		{
+			setStartup(true)
 			setTextArray(startupSequence['5'])
-		}, 3500)
+		}, 5000)
 
 		setTimeout(() =>
 		{
 			props.setBootingUp(false);
-		}, 6000)
+		}, 8000)
+
 	}, []);
 
 	return (
+		<>
 		<div style={{position: 'absolute', top: 10, left: 30}}>
 			{textArray.map(textElement =>
 			{
 				return <p>{textElement}</p>;
 			})}
 		</div>
+			{startup ?
+			<ReactAudioPlayer
+				src="client/static/sounds/Apple Startup.wav"
+				autoPlay = {true}
+			/>
+			: null }
+			</>
 	);
 };
 

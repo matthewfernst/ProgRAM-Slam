@@ -62,9 +62,6 @@ const Terminal = props =>
 					return {
 						output: OutputFactory.makeTextOutput('Here is a list of commands you can try!\n' +
 							'' +
-							'\'ls\' - list everything in current directory\n' +
-							'\'echo _\' - outputs whatever is passed to the terminal\n' +
-							'\'exit\' - exits the terminal\n' +
 							'\'slogan\' - displays the csu logo and slogan for event\n' +
 							'\'markvid\' - displays marketing video for event\n' +
 							'\'davemd\' - for those light hearted people\n')
@@ -74,6 +71,7 @@ const Terminal = props =>
 				'optDef': {}
 
 			},
+
 		})
 	});
 
