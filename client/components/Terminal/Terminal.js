@@ -3,7 +3,7 @@ import React, {useEffect} from 'react';
 import {Box} from "@material-ui/core";
 
 import ReactTerminal  from 'react-terminal-component';
-import {FileSystem, CommandMapping, defaultCommandMapping, EmulatorState, OutputFactory } from 'javascript-terminal';
+import {FileSystem, CommandMapping, defaultCommandMapping, EmulatorState, OutputFactory } from '../../../javascript-terminal/lib/terminal';
 
 import {files} from "./FileSystem";
 import {aByteSizeCodingCompetition, csuLogo} from "./ASCIIArt";

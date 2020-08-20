@@ -38,7 +38,6 @@
     "css-loader": "^4.2.0",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",
-    "javascript-terminal": "^1.0.3",
     "node-sass": "^4.14.1",
     "postcss-loader": "^3.0.0",
     "precss": "^4.0.0",
