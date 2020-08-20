@@ -13209,8 +13209,8 @@ exports.makeError = exports.emulatorErrorType = void 0;
  * @type {Object}
  */
 var emulatorErrorType = {
-  COMMAND_NOT_FOUND: 'Command not found ahhhhh',
-  UNEXPECTED_COMMAND_FAILURE: 'Unhandled command error'
+  COMMAND_NOT_FOUND: "Looks Like That Command Isn't Valid. Try 'help' For More Information.",
+  UNEXPECTED_COMMAND_FAILURE: 'An Unknown Command Error Occurred'
 };
 /**
  * Creates an error to display to the user originating from the emulator

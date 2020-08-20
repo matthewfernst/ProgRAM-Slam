@@ -6,15 +6,9 @@ import ReactTerminal  from '../../../react-terminal-component/lib/react-terminal
 import {FileSystem, CommandMapping, defaultCommandMapping, EmulatorState, OutputFactory } from '../../../react-terminal-component/javascript-terminal/lib/terminal';
 
 import {files} from "./FileSystem";
-import {aByteSizeCodingCompetition, csuLogo} from "./ASCIIArt";
+import {aByteSizeCodingCompetition} from "./ASCIIArt";
 
 import gusVideo from "../../static/videos/gus.mp4"
-import CSULogo from "../../static/images/CSU-Logo.png";
-
-function OpenInNewTab(url) {
-	var win = window.open(url, '_blank');
-	win.focus();
-}
 
 const Terminal = props =>
 {
@@ -53,39 +47,51 @@ const Terminal = props =>
 				'optDef': {}
 			},
 			'markvid': {
-							'function': (state, opts) => {
-
-								return {
-									output: OutputFactory.makeTextOutput(<video width="100%" height="85%" controls>
-										<source src={gusVideo} type="video/mp4"/>
-									</video>)
-								};
-
-							},
-							'optDef': {}
-						},
-
-			'alternate': {
 				'function': (state, opts) => {
 
 					return {
-						output: OutputFactory.makeTextOutput("Let's get Crack-a-Hacking!")
+						output: OutputFactory.makeTextOutput(<video width="100%" height="85%" controls>
+							<source src={gusVideo} type="video/mp4"/>
+						</video>)
 					};
 
+				},
+				'optDef': {}
+			},
+			'alternate': {
+				'function': (state, opts) => {
+					return {
+						output: OutputFactory.makeTextOutput("Let's get Crack-a-Hacking!")
+					};
 				},
 				'optDef': {}
 			},
 
 			'discord': {
 				'function': (state, opts) => {
-						var win = window.open('https://discord.gg/DyTfs2B', '_blank');
-						win.focus();
-						return { };
+					let win = window.open('https://discord.gg/DyTfs2B', '_blank');
+					win.focus();
+					return {};
 				},
 				'optDef': {}
 			},
-
 			'help': {
+				'function': (state, opts) => {
+					return {
+						output: OutputFactory.makeTextOutput(
+							'Welcome to Help!' + '\n' + '\n' +
+							"Some Basic Commands" + '\n' +
+							'cat: Read A File ' + '\n' +
+							'cd: Change Directory' + '\n' +
+							'ls: List Files' + '\n' +
+							'\n' +
+							'For more info, try typing \"man [command]\"'
+						)
+					};
+				},
+				'optDef': {}
+			},
+			'man': {
 				'function': (state, opts) => {
 					let input = opts.toString()
 					if (input === 'cat'){
@@ -113,7 +119,6 @@ const Terminal = props =>
 								'    Change the shell working directory.')
 						};
 					}
-
 					else if (input === 'ls'){
 						return {
 							output: OutputFactory.makeTextOutput('NAME\n' +
@@ -128,18 +133,6 @@ const Terminal = props =>
 								'     each operand that names a file of type directory, ls displays the names\n' +
 								'     of files contained within that directory, as well as any requested, asso-\n' +
 								'     ciated information.')
-						};
-					}
-					if (input === ''){
-						return {
-							output: OutputFactory.makeTextOutput('Welcome to help!\n' +
-								"Some Basic Commands" + '\n' +
-								'cat: Read A File ' + '\n' +
-								'cd: Change Directory' + '\n' +
-								'ls: List Files' + '\n' +
-								'\n' +
-								'For more info, try typing \"help [command]\"'
-							)
 						};
 					}
 				},
