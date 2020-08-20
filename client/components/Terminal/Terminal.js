@@ -9,6 +9,8 @@ import {files} from "./FileSystem";
 import {aByteSizeCodingCompetition, csuLogo} from "./ASCIIArt";
 
 import gusVideo from "../../static/videos/gus.mp4"
+import CSULogo from "../../static/images/CSU-Logo.png";
+
 
 const Terminal = props =>
 {
@@ -69,12 +71,22 @@ const Terminal = props =>
 				},
 				'optDef': {}
 			},
+			'display': {
+				'function': (state, opts) => {
+					return {
+						output: OutputFactory.makeTextOutput(<img src={opts} style={{width: 100, height: 100}}/>)
+					};
+
+				},
+				'optDef': {}
+			},
+
 			'help': {
 				'function': (state, opts) => {
 					return {
 						output: OutputFactory.makeTextOutput('Here is a list of commands you can try!\n' +
 							'' +
-							'\'slogan\' - displays the csu logo and slogan for event\n' +
+							'\'slogan\' - displays slogan for event\n' +
 							'\'markvid\' - displays marketing video for event\n' +
 							'\'alternate\' - displays an additional slogan\n' +
 							'\'davemd\' - for those light hearted people\n')
@@ -82,7 +94,7 @@ const Terminal = props =>
 
 				},
 				'optDef': {}
-			},
+			}
 		})
 	});
 
