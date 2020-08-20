@@ -8,6 +8,7 @@ import Terminal from "./Terminal/Terminal";
 
 const App = () =>
 {
+    const [bootingUp, setBootingUp] = useState(true);
     const [darkMode, setDarkMode] = useState(true);
 
     const theme = React.useMemo(
@@ -22,10 +23,11 @@ const App = () =>
         [darkMode],
     );
 
+
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <Terminal darkMode={darkMode} setDarkMode={setDarkMode}/>
+            {bootingUp ? <BootUp setBootingUp={setBootingUp}/> : <Terminal darkMode={darkMode} setDarkMode={setDarkMode}/>}
         </ThemeProvider>
     );
 };

@@ -1,10 +1,16 @@
-import React, {useState} from "react";
+import React, {useEffect} from "react";
 
 import { Container, Grid } from "@material-ui/core";
 
 const BootUp = props =>
 {
-	const [showVideoPage, setShowVideoPage] = useState(true);
+	useEffect(() =>
+	{
+		setTimeout(() =>
+		{
+			props.setBootingUp(false);
+		}, 3000)
+	});
 
 	return (
 		<Container>
@@ -13,7 +19,7 @@ const BootUp = props =>
 				spacing={2} style={{height: "100vh"}}
 			>
 				<Grid item>
-					{showVideoPage ? <VideoPage setShowVideoPage={setShowVideoPage} {...props}/> : <HomePage {...props}/>}
+					Booting Up...
 				</Grid>
 			</Grid>
 		</Container>
