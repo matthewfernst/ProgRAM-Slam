@@ -1,9 +1,43 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-import ReactTerminal, { ReactOutputRenderers } from 'react-terminal-component';
-import {CommandMapping, defaultCommandMapping, EmulatorState, OutputFactory } from 'javascript-terminal';
+import ReactTerminal, { ReactOutputRenderers,  } from 'react-terminal-component';
+import {
+	CommandMapping,
+	defaultCommandMapping,
+	EmulatorState,
+	OutputFactory,
+} from 'javascript-terminal';
+import gusVid from '../../static/videos/gus.mp4';
+import {aByteSizeCodingCompetition, csuLogo} from "./ASCIIArt";
 
-import { aByteSizeCodingCompetition } from "./ASCIIArt";
+const PAPER_TYPE = 'paper';
+
+const paperStyles = {
+	backgroundColor: 'white',
+	color: 'black',
+	fontFamily: 'sans-serif',
+	padding: '1em',
+	margin: '1em 0',
+	borderRadius: '0.2em'
+};
+
+const PaperOutput = ({ content }) => (
+	<div style={paperStyles}>
+		<h1>{content.title}</h1>
+
+		{content.body}
+	</div>
+);
+
+const createPaperRecord = (title, body) => {
+	return new OutputFactory.OutputRecord({
+		type: PAPER_TYPE,
+		content: {
+			title,
+			body
+		}
+	});
+};
 
 const Terminal = props =>
 {
@@ -17,14 +51,31 @@ const Terminal = props =>
 					return { output: OutputFactory.makeTextOutput('success') };
 				},
 				'optDef': {}
+
 			},
 			'slogan': {
 				'function': (state, opts) =>
 				{
-					return { output: OutputFactory.makeTextOutput(aByteSizeCodingCompetition) };
+					return { output: OutputFactory.makeTextOutput(csuLogo + '\n\n' + aByteSizeCodingCompetition) };
 				},
 				'optDef': {}
-			}
+
+			},
+			'markvid': {
+				'function': (state, opts) => {
+
+					return {
+						output: OutputFactory.makeTextOutput(<video width="100%" height="85%" controls>
+							<source src={gusVid} type="video/mp4"/>
+						</video>)
+					};
+
+				},
+				'optDef': {}
+
+			},
+
+
 		})
 	});
 
@@ -42,6 +93,7 @@ const Terminal = props =>
 				width: '100%',
 				height: '100vh'
 			}}
+			outputRenderers={{...ReactOutputRenderers, [PAPER_TYPE]: PaperOutput}}
 			emulatorState={customState}
 		/>
 
