@@ -1,80 +1,30 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-import ReactTerminal, { ReactOutputRenderers,  } from 'react-terminal-component';
+import ReactTerminal, { ReactOutputRenderers } from 'react-terminal-component';
 import {CommandMapping, defaultCommandMapping, EmulatorState, OutputFactory } from 'javascript-terminal';
 
-
-const PAPER_TYPE = 'paper';
-
-const paperStyles = {
-	backgroundColor: 'white',
-	color: 'black',
-	fontFamily: 'sans-serif',
-	padding: '1em',
-	margin: '1em 0',
-	borderRadius: '0.2em'
-};
-
-const PaperOutput = ({ content }) => (
-	<div style={paperStyles}>
-		<h1>{content.title}</h1>
-
-		{content.body}
-	</div>
-);
-
-const createPaperRecord = (title, body) => {
-	return new OutputFactory.OutputRecord({
-		type: PAPER_TYPE,
-		content: {
-			title,
-			body
-		}
-	});
-};
+import { aByteSizeCodingCompetition } from "./ASCIIArt";
 
 const Terminal = props =>
 {
 	const customState = EmulatorState.create({
 		'commandMapping': CommandMapping.create({
 			...defaultCommandMapping,
-			'print': {
-				'function': (state, opts) => {
-					const userInput = opts.join(' ');
-
-					return {
-						output: createPaperRecord('A custom renderer', userInput)
-					};
-				},
-				'optDef': {}
-			},
 			'davemd': {
-				'function': (state, opts) => {
+				'function': (state, opts) =>
+				{
 					props.setDarkMode(!props.darkMode)
-					return {
-						output: OutputFactory.makeTextOutput('success')
-					};
-
+					return { output: OutputFactory.makeTextOutput('success') };
 				},
 				'optDef': {}
-
 			},
 			'slogan': {
-				'function': (state, opts) => {
-					return {
-						output: OutputFactory.makeTextOutput('    ___       ____        __          _____ _               ______          ___                ______                           __  _ __  _            \n' +
-							'   /   |     / __ )__  __/ /____     / ___/(_)___  ___     / ____/___  ____/ (_)___  ____ _   / ____/___  ____ ___  ____  ___  / /_(_) /_(_)___  ____  \n' +
-							'  / /| |    / __  / / / / __/ _ \\    \\__ \\/ /_  / / _ \\   / /   / __ \\/ __  / / __ \\/ __ `/  / /   / __ \\/ __ `__ \\/ __ \\/ _ \\/ __/ / __/ / __ \\/ __ \\ \n' +
-							' / ___ |   / /_/ / /_/ / /_/  __/   ___/ / / / /_/  __/  / /___/ /_/ / /_/ / / / / / /_/ /  / /___/ /_/ / / / / / / /_/ /  __/ /_/ / /_/ / /_/ / / / / \n' +
-							'/_/  |_|  /_____/\\__, /\\__/\\___/   /____/_/ /___/\\___/   \\____/\\____/\\__,_/_/_/ /_/\\__, /   \\____/\\____/_/ /_/ /_/ .___/\\___/\\__/_/\\__/_/\\____/_/ /_(_)\n' +
-							'                /____/                                                            /____/                        /_/                                    ')
-					};
-
+				'function': (state, opts) =>
+				{
+					return { output: OutputFactory.makeTextOutput(aByteSizeCodingCompetition) };
 				},
 				'optDef': {}
-
 			}
-
 		})
 	});
 
@@ -92,7 +42,6 @@ const Terminal = props =>
 				width: '100%',
 				height: '100vh'
 			}}
-			outputRenderers={{...ReactOutputRenderers, [PAPER_TYPE]: PaperOutput}}
 			emulatorState={customState}
 		/>
 
