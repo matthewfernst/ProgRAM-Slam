@@ -139,12 +139,12 @@ const SystemInfo = props =>
 								Memory Test:
 							</Grid>
 							<Grid item>
-								{ props.state === 6 ? '20Kb' :
-								  props.state === 7 ? '87Kb' :
-								  props.state === 8 ? '173Kb' :
-								  props.state === 9 ? '432Mb' :
-								  props.state === 10 ? '1753Kb' :
-								  '47534Mb'
+								{ props.state === 6 ? '20KB' :
+								  props.state === 7 ? '87KB' :
+								  props.state === 8 ? '173KB' :
+								  props.state === 9 ? '432MB' :
+								  props.state === 10 ? '1753KB' :
+								  '47534MB'
 								}
 							</Grid>
 						</Grid>

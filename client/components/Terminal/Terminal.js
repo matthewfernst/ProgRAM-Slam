@@ -40,7 +40,7 @@ const Terminal = props =>
 			'slogan': {
 				'function': (state, opts) =>
 				{
-					return { output: OutputFactory.makeTextOutput(csuLogo + '\n\n' + aByteSizeCodingCompetition) };
+					return { output: OutputFactory.makeTextOutput(aByteSizeCodingCompetition) };
 				},
 				'optDef': {}
 			},
