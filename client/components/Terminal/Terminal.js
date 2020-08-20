@@ -75,26 +75,6 @@ const Terminal = props =>
 				},
 				'optDef': {}
 			},
-			'display': {
-				'function': (state, opts) => {
-					console.log(state,opts)
-					let image;
-					if (opts.toString() === 'cam'){
-						return {
-							output: OutputFactory.makeTextOutput(<img src={CSULogo} style={{width: 100, height: 100}}/>)
-						};
-					}
-
-
-					else{
-						return {
-
-						};
-					}
-
-				},
-				'optDef': {}
-			},
 
 			'discord': {
 				'function': (state, opts) => {
@@ -110,6 +90,7 @@ const Terminal = props =>
 					return {
 						output: OutputFactory.makeTextOutput('Here is a list of commands you can try!\n' +
 							'' +
+							'\'discord\' - opens news tab to the discord for event\n' +
 							'\'slogan\' - displays slogan for event\n' +
 							'\'markvid\' - displays marketing video for event\n' +
 							'\'alternate\' - displays an additional slogan\n' +
