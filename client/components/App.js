@@ -10,7 +10,8 @@ import ClaconFont from '../static/fonts/clacon.ttf';
 
 const App = () =>
 {
-    const [darkMode, setDarkMode] = useState(useMediaQuery('(prefers-color-scheme: dark)'));
+    const [darkMode, setDarkMode] = useState(true);
+    const daveMode = useState(false);
 
     const theme = React.useMemo(
         () =>
