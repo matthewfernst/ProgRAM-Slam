@@ -45,12 +45,23 @@ const Terminal = props =>
 				'optDef': {}
 			},
 			'markvid': {
+							'function': (state, opts) => {
+
+								return {
+									output: OutputFactory.makeTextOutput(<video width="100%" height="85%" controls>
+										<source src={gusVideo} type="video/mp4"/>
+									</video>)
+								};
+
+							},
+							'optDef': {}
+						},
+						
+			'alternate': {
 				'function': (state, opts) => {
 
 					return {
-						output: OutputFactory.makeTextOutput(<video width="100%" height="85%" controls>
-							<source src={gusVideo} type="video/mp4"/>
-						</video>)
+						output: OutputFactory.makeTextOutput("Let's get Crack-a-Hacking!")
 					};
 
 				},
@@ -64,6 +75,7 @@ const Terminal = props =>
 							'' +
 							'\'slogan\' - displays the csu logo and slogan for event\n' +
 							'\'markvid\' - displays marketing video for event\n' +
+							'\'alternate\' - displays an additional slogan\n' +
 							'\'davemd\' - for those light hearted people\n')
 					};
 
