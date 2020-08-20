@@ -9,20 +9,26 @@ import AppleStartUp from "../../static/sounds/Apple-Startup.wav";
 
 const BootUp = props =>
 {
-	const [startup, setStartup] = useState(false)
+	const [state, setState] = useState(0);
 
 	useEffect(() =>
 	{
-		setTimeout(() =>
-		{
-			setStartup(true)
-		}, 5000)
-
-		setTimeout(() =>
-		{
-			props.setBootingUp(false);
-		}, 8000)
-
+		setTimeout(() => setState(1), 300)
+		setTimeout(() => setState(2), 500)
+		setTimeout(() => setState(3), 1000)
+		setTimeout(() => setState(4), 1500)
+		setTimeout(() => setState(5), 2000)
+		setTimeout(() => setState(6), 2100)
+		setTimeout(() => setState(7), 2200)
+		setTimeout(() => setState(8), 2300)
+		setTimeout(() => setState(9), 2400)
+		setTimeout(() => setState(10), 2500)
+		setTimeout(() => setState(11), 3500)
+		setTimeout(() => setState(12), 4500)
+		setTimeout(() => setState(13), 5000)
+		setTimeout(() => setState(14), 5200)
+		setTimeout(() => setState(15), 5500)
+		setTimeout(() => props.setBootingUp(false), 8000)
 	}, []);
 
 	return (
@@ -32,24 +38,29 @@ const BootUp = props =>
 					<Grid item>
 						<HeaderAndReleaseData />
 					</Grid>
-					<Grid item>
-						Text
-					</Grid>
-					<Grid item>
-						<SystemInfo />
-					</Grid>
-					<Grid item>
-						<DriveInfo />
-					</Grid>
-					<Grid item>
-						Initializing OS . . . . . . SUCCESS
-					</Grid>
-					<Grid item>
-						Starting Computer . . .
-					</Grid>
+					{ state >= 1 ?
+						<Grid item>
+							Text
+						</Grid> : null }
+					{ state >= 2 ?
+						<Grid item>
+							<SystemInfo state={state} />
+						</Grid> : null }
+					{ state >= 11 ?
+						<Grid item>
+							<DriveInfo state={state} />
+						</Grid> : null }
+					{ state >= 14 ?
+						<Grid item>
+							Initializing OS . . . . . . SUCCESS
+						</Grid> : null }
+					{ state >= 15 ?
+						<Grid item>
+							Starting Computer . . .
+						</Grid> : null }
 				</Grid>
 			</Box>
-			{startup ? <ReactAudioPlayer src={AppleStartUp} autoPlay={true} controls={false}/> : null}
+			{state >= 4 ? <ReactAudioPlayer src={AppleStartUp} autoPlay={true} controls={false}/> : null}
 		</>
 	);
 };
@@ -63,20 +74,20 @@ const HeaderAndReleaseData = props =>
 			</Grid>
 			<Grid item>
 				<Grid container justify={"center"} alignContent={"center"} alignItems={"center"} direction={"column"} style={{height: '100%'}}>
-					<Grid>
+					<Grid item>
 						Cam Open Source OS
 					</Grid>
-					<Grid>
+					<Grid item>
 						Test
 					</Grid>
 				</Grid>
 			</Grid>
 			<Grid item>
 				<Grid container justify={"center"} direction={"column"} style={{height: '100%'}}>
-					<Grid>
+					<Grid item>
 						Cam Open Source OS
 					</Grid>
-					<Grid>
+					<Grid item>
 						Test
 					</Grid>
 				</Grid>
@@ -89,42 +100,51 @@ const SystemInfo = props =>
 {
 	return(
 		<Grid container direction={"column"} style={{paddingLeft: 20}}>
-			<Grid item>
-				<Box pl={1} pr={1}>
-					<Grid container spacing={2}>
-						<Grid item>
-							User:
+			{ props.state >= 3 ?
+				<Grid item>
+					<Box pl={1} pr={1}>
+						<Grid container spacing={2}>
+							<Grid item>
+								User:
+							</Grid>
+							<Grid item>
+								Cam The Ram
+							</Grid>
 						</Grid>
-						<Grid item>
-							Cam The Ram
+					</Box>
+				</Grid> : null }
+			{ props.state >= 4 ?
+				<Grid item>
+					<Box pl={1} pr={1}>
+						<Grid container spacing={2}>
+							<Grid item>
+								Device Name:
+							</Grid>
+							<Grid item>
+								Event Name Here
+							</Grid>
 						</Grid>
-					</Grid>
-				</Box>
-			</Grid>
-			<Grid item>
-				<Box pl={1} pr={1}>
-					<Grid container spacing={2}>
-						<Grid item>
-							Device Name:
+					</Box>
+				</Grid> : null }
+			{ props.state >= 5 ?
+				<Grid item>
+					<Box pl={1} pr={1}>
+						<Grid container spacing={2}>
+							<Grid item>
+								Memory Test:
+							</Grid>
+							<Grid item>
+								{ props.state === 6 ? '20Kb' :
+								  props.state === 7 ? '87Kb' :
+								  props.state === 8 ? '173Kb' :
+								  props.state === 9 ? '432Mb' :
+								  props.state === 10 ? '1753Kb' :
+								  '47534Mb'
+								}
+							</Grid>
 						</Grid>
-						<Grid item>
-							Event Name Here
-						</Grid>
-					</Grid>
-				</Box>
-			</Grid>
-			<Grid item>
-				<Box pl={1} pr={1}>
-					<Grid container spacing={2}>
-						<Grid item>
-							Memory Test:
-						</Grid>
-						<Grid item>
-							20Kb
-						</Grid>
-					</Grid>
-				</Box>
-			</Grid>
+					</Box>
+				</Grid> : null }
 		</Grid>
 	);
 }
@@ -133,12 +153,14 @@ const DriveInfo = props =>
 {
 	return(
 		<Grid container direction={"column"} spacing={1}>
-			<Grid item>
-				Detecting Primary Drive (C) . . . . . . SUCCESS
-			</Grid>
-			<Grid item>
-				Detecting Secondary Drive (D) . . . . . . SUCCESS
-			</Grid>
+			{ props.state >= 12 ?
+				<Grid item>
+					Detecting Primary Drive (C) . . . . . . SUCCESS
+				</Grid> : null }
+			{ props.state >= 13 ?
+				<Grid item>
+					Detecting Secondary Drive (D) . . . . . . SUCCESS
+				</Grid> : null }
 		</Grid>
 	);
 }
