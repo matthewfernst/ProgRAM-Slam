@@ -3,7 +3,9 @@
   "version": "1.1.12",
   "description": "Project Short Description",
   "scripts": {
-    "start": "webpack-dev-server -d",
+    "start": "npm run build-js-terminal && npm run build-react-terminal && webpack-dev-server -d",
+    "build-js-terminal": "cd react-terminal-component/javascript-terminal && yarn install && yarn build && cd ../..",
+    "build-react-terminal": "cd react-terminal-component && yarn install && yarn build && cd ..",
     "build": "webpack -p"
   },
   "author": "Max Rosoff",
@@ -23,7 +25,6 @@
     "react": "^16.13.1",
     "react-audio-player": "^0.13.0",
     "react-dom": "^16.13.1",
-    "react-terminal-component": "^1.4.1",
     "react-transition-group": "^4.4.1",
     "styled-components": "^5.1.1"
   },

@@ -2,8 +2,8 @@ import React, {useEffect} from 'react';
 
 import {Box} from "@material-ui/core";
 
-import ReactTerminal  from 'react-terminal-component';
-import {FileSystem, CommandMapping, defaultCommandMapping, EmulatorState, OutputFactory } from '../../../javascript-terminal/lib/terminal';
+import ReactTerminal  from '../../../react-terminal-component/lib/react-terminal-component';
+import {FileSystem, CommandMapping, defaultCommandMapping, EmulatorState, OutputFactory } from '../../../react-terminal-component/javascript-terminal/lib/terminal';
 
 import {files} from "./FileSystem";
 import {aByteSizeCodingCompetition, csuLogo} from "./ASCIIArt";
