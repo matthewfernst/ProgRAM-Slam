@@ -1,3 +1,3 @@
-# Event-Name-Site
+# ProgRAM-Slam-Site
 
-### Website For CSU Coding Competition
+### Website For ProgRAM Slam, A CSU Coding Competition
