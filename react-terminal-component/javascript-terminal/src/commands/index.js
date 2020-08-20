@@ -3,6 +3,7 @@ export const commandNames = [
   'cd',
   'clear',
   'cp',
+  'display',
   'echo',
   'head',
   'history',

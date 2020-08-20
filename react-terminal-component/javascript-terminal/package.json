@@ -52,6 +52,7 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
+    "react": "^16.13.1",
     "get-options": "^1.2.0",
     "immutable": "^4.0.0-rc.12",
     "minimatch": "^3.0.4",

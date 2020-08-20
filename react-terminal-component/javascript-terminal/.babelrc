@@ -5,10 +5,11 @@
       {
         "modules": "commonjs"
       }
-    ]
+    ],
+    "@babel/react"
   ],
   "plugins": [
     "add-module-exports",
-    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-proposal-object-rest-spread"
   ]
 }

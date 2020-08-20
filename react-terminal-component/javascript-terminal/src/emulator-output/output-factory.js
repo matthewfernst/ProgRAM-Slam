@@ -1,5 +1,5 @@
 import { Record } from 'immutable';
-import { HEADER_OUTPUT_TYPE, TEXT_OUTPUT_TYPE, TEXT_ERROR_OUTPUT_TYPE } from 'emulator-output/output-type';
+import { HEADER_OUTPUT_TYPE, TEXT_OUTPUT_TYPE, IMG_OUTPUT_TYPE, TEXT_ERROR_OUTPUT_TYPE } from 'emulator-output/output-type';
 
 /**
  * Output from a command or emulator used for display to the user
@@ -30,6 +30,18 @@ export const makeHeaderOutput = (cwd, command) => {
 export const makeTextOutput = (content) => {
   return new OutputRecord({
     type: TEXT_OUTPUT_TYPE,
+    content
+  });
+};
+
+/**
+ * Unstyled image output
+ * @param  {img}
+ * @return {OutputRecord}   output record
+ */
+export const makeImgOutput = (content) => {
+  return new OutputRecord({
+    type: IMG_OUTPUT_TYPE,
     content
   });
 };
