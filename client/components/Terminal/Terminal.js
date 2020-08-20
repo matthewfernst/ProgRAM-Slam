@@ -2,8 +2,8 @@ import React, {useEffect} from 'react';
 
 import {Box} from "@material-ui/core";
 
-import ReactTerminal  from 'react-terminal-component';
-import {FileSystem, CommandMapping, defaultCommandMapping, EmulatorState, OutputFactory } from 'javascript-terminal';
+import ReactTerminal  from '../../../react-terminal-component/lib/react-terminal-component';
+import {FileSystem, CommandMapping, defaultCommandMapping, EmulatorState, OutputFactory } from '../../../react-terminal-component/javascript-terminal/lib/terminal';
 
 import {files} from "./FileSystem";
 import {aByteSizeCodingCompetition, csuLogo} from "./ASCIIArt";
@@ -87,16 +87,61 @@ const Terminal = props =>
 
 			'help': {
 				'function': (state, opts) => {
-					return {
-						output: OutputFactory.makeTextOutput('Here is a list of commands you can try!\n' +
-							'' +
-							'\'discord\' - opens news tab to the discord for event\n' +
-							'\'slogan\' - displays slogan for event\n' +
-							'\'markvid\' - displays marketing video for event\n' +
-							'\'alternate\' - displays an additional slogan\n' +
-							'\'davemd\' - for those light hearted people\n')
-					};
+					let input = opts.toString()
+					if (input === 'cat'){
+						return {
+							output: OutputFactory.makeTextOutput('NAME\n' +
+								'     cat -- concatenate and print files\n' +
+								'\n' +
+								'SYNOPSIS\n' +
+								'     cat [file ...]\n' +
+								'\n' +
+								'DESCRIPTION\n' +
+								'     The cat utility reads files sequentially, writing them to the standard\n' +
+								'     output.')
+						};
+					}
+					else if (input === 'cd'){
+						return {
+							output: OutputFactory.makeTextOutput('NAME\n' +
+								'    cd - Change the shell working directory.\n' +
+								'\n' +
+								'SYNOPSIS\n' +
+								'    cd [dir]\n' +
+								'\n' +
+								'DESCRIPTION\n' +
+								'    Change the shell working directory.')
+						};
+					}
 
+					else if (input === 'ls'){
+						return {
+							output: OutputFactory.makeTextOutput('NAME\n' +
+								'     ls -- list directory contents\n' +
+								'\n' +
+								'SYNOPSIS\n' +
+								'     ls [file ...]\n' +
+								'\n' +
+								'DESCRIPTION\n' +
+								'     For each operand that names a file of a type other than directory, ls\n' +
+								'     displays its name as well as any requested, associated information.  For\n' +
+								'     each operand that names a file of type directory, ls displays the names\n' +
+								'     of files contained within that directory, as well as any requested, asso-\n' +
+								'     ciated information.')
+						};
+					}
+					if (input === ''){
+						return {
+							output: OutputFactory.makeTextOutput('Welcome to help!\n' +
+								"Some Basic Commands" + '\n' +
+								'cat: Read A File ' + '\n' +
+								'cd: Change Directory' + '\n' +
+								'ls: List Files' + '\n' +
+								'\n' +
+								'For more info, try typing \"help [command]\"'
+							)
+						};
+					}
 				},
 				'optDef': {}
 			}
