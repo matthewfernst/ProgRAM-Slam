@@ -1646,15 +1646,15 @@ var globPattern=partialStr.endsWith('/')?completeSubfolderPattern:completeNamePa
  * @param  {Map}    commandMapping command mapping from emulator state
  * @param  {string} commandName    name of command to run
  * @param  {array}  commandArgs    commands to provide to the command function
- * @param  {function}  notFoundCallback a default function to be run if no command is found
+ * @param  {string} errorString    a default string to be printed if no command is found
  * @return {object}                outputs and/or new state of the emulator
- */var run=function run(commandMapping,commandName,commandArgs){var notFoundCallback=arguments.length>3&&arguments[3]!==undefined?arguments[3]:function(){return{output:makeRunnerErrorOutput(_emulatorError.emulatorErrorType.COMMAND_NOT_FOUND)};};if(!CommandMappingUtil.isCommandSet(commandMapping,commandName)){return notFoundCallback.apply(void 0,_toConsumableArray(commandArgs));}var command=CommandMappingUtil.getCommandFn(commandMapping,commandName);try{return command.apply(void 0,_toConsumableArray(commandArgs));// run extracted command from the mapping
+ */var run=function run(commandMapping,commandName,commandArgs){var errorString=arguments.length>3&&arguments[3]!==undefined?arguments[3]:_emulatorError.emulatorErrorType.COMMAND_NOT_FOUND;var notFoundCallback=function notFoundCallback(){return{output:makeRunnerErrorOutput(errorString)};};if(!CommandMappingUtil.isCommandSet(commandMapping,commandName)){return notFoundCallback.apply(void 0,_toConsumableArray(commandArgs));}var command=CommandMappingUtil.getCommandFn(commandMapping,commandName);try{return command.apply(void 0,_toConsumableArray(commandArgs));// run extracted command from the mapping
 }catch(fatalCommandError){return{output:makeRunnerErrorOutput(_emulatorError.emulatorErrorType.UNEXPECTED_COMMAND_FAILURE)};}};exports.run=run;/***/},/***/"./src/emulator/emulator-error.js":/*!****************************************!*\
   !*** ./src/emulator/emulator-error.js ***!
   \****************************************/ /*! no static exports found */ /***/function(module,exports,__webpack_require__){"use strict";Object.defineProperty(exports,"__esModule",{value:true});exports.makeError=exports.emulatorErrorType=void 0;/**
  * Emulator error type
  * @type {Object}
- */var emulatorErrorType={COMMAND_NOT_FOUND:"Looks Like That Command Isn't Valid. Try 'help' For More Information.",UNEXPECTED_COMMAND_FAILURE:'An Unknown Command Error Occurred'};/**
+ */var emulatorErrorType={COMMAND_NOT_FOUND:'Command not found',UNEXPECTED_COMMAND_FAILURE:'An Unknown Command Error Occurred'};/**
  * Creates an error to display to the user originating from the emulator
  * @param  {string} emulatorErrorType  file system error type
  * @param  {string} [message='']       optional metadata for developers about the error
@@ -1679,9 +1679,10 @@ var globPattern=partialStr.endsWith('/')?completeSubfolderPattern:completeNamePa
      * @param  {EmulatorState}  state                   emulator state before running command
      * @param  {string}         str                     command string to execute
      * @param  {Array}          [executionListeners=[]] list of plugins to notify while running the command
+     * @param  {string}         errorString             error string to print on command failure
      * @return {EmulatorState}                          updated emulator state after running command
-     */value:function execute(state,str){var executionListeners=arguments.length>2&&arguments[2]!==undefined?arguments[2]:[];var _iterator=_createForOfIteratorHelper(executionListeners),_step;try{for(_iterator.s();!(_step=_iterator.n()).done;){var executionListener=_step.value;executionListener.onExecuteStarted(state,str);}}catch(err){_iterator.e(err);}finally{_iterator.f();};state=this._addHeaderOutput(state,str);if(str.trim()===''){// empty command string
-state=this._addCommandOutputs(state,[(0,_outputFactory.makeTextOutput)('')]);}else{state=this._addCommandToHistory(state,str);state=this._updateStateByExecution(state,str);}var _iterator2=_createForOfIteratorHelper(executionListeners),_step2;try{for(_iterator2.s();!(_step2=_iterator2.n()).done;){var _executionListener=_step2.value;_executionListener.onExecuteCompleted(state);}}catch(err){_iterator2.e(err);}finally{_iterator2.f();};return state;}},{key:"_updateStateByExecution",value:function _updateStateByExecution(state,commandStrToExecute){var _iterator3=_createForOfIteratorHelper((0,_commandParser["default"])(commandStrToExecute)),_step3;try{for(_iterator3.s();!(_step3=_iterator3.n()).done;){var _step3$value=_step3.value,commandName=_step3$value.commandName,commandOptions=_step3$value.commandOptions;var commandMapping=state.getCommandMapping();var commandArgs=[state,commandOptions];var _CommandRunner$run=CommandRunner.run(commandMapping,commandName,commandArgs),nextState=_CommandRunner$run.state,output=_CommandRunner$run.output,outputs=_CommandRunner$run.outputs;if(nextState){state=nextState;}if(output){state=this._addCommandOutputs(state,[output]);}else if(outputs){state=this._addCommandOutputs(state,outputs);}}}catch(err){_iterator3.e(err);}finally{_iterator3.f();}return state;}},{key:"_addCommandToHistory",value:function _addCommandToHistory(state,command){var history=state.getHistory();return state.setHistory((0,_history.recordCommand)(history,command));}},{key:"_addHeaderOutput",value:function _addHeaderOutput(state,commandStr){var envVariables=state.getEnvVariables();var cwd=(0,_environmentVariables.getEnvironmentVariable)(envVariables,'cwd');return this._addCommandOutputs(state,[(0,_outputFactory.makeHeaderOutput)(cwd,commandStr)]);}/**
+     */value:function execute(state,str){var executionListeners=arguments.length>2&&arguments[2]!==undefined?arguments[2]:[];var errorString=arguments.length>3?arguments[3]:undefined;var _iterator=_createForOfIteratorHelper(executionListeners),_step;try{for(_iterator.s();!(_step=_iterator.n()).done;){var executionListener=_step.value;executionListener.onExecuteStarted(state,str);}}catch(err){_iterator.e(err);}finally{_iterator.f();}state=this._addHeaderOutput(state,str);if(str.trim()===''){// empty command string
+state=this._addCommandOutputs(state,[(0,_outputFactory.makeTextOutput)('')]);}else{state=this._addCommandToHistory(state,str);state=this._updateStateByExecution(state,str,errorString);}var _iterator2=_createForOfIteratorHelper(executionListeners),_step2;try{for(_iterator2.s();!(_step2=_iterator2.n()).done;){var _executionListener=_step2.value;_executionListener.onExecuteCompleted(state);}}catch(err){_iterator2.e(err);}finally{_iterator2.f();}return state;}},{key:"_updateStateByExecution",value:function _updateStateByExecution(state,commandStrToExecute,errorString){var _iterator3=_createForOfIteratorHelper((0,_commandParser["default"])(commandStrToExecute)),_step3;try{for(_iterator3.s();!(_step3=_iterator3.n()).done;){var _step3$value=_step3.value,commandName=_step3$value.commandName,commandOptions=_step3$value.commandOptions;var commandMapping=state.getCommandMapping();var commandArgs=[state,commandOptions];var _CommandRunner$run=CommandRunner.run(commandMapping,commandName,commandArgs,errorString),nextState=_CommandRunner$run.state,output=_CommandRunner$run.output,outputs=_CommandRunner$run.outputs;if(nextState){state=nextState;}if(output){state=this._addCommandOutputs(state,[output]);}else if(outputs){state=this._addCommandOutputs(state,outputs);}}}catch(err){_iterator3.e(err);}finally{_iterator3.f();}return state;}},{key:"_addCommandToHistory",value:function _addCommandToHistory(state,command){var history=state.getHistory();return state.setHistory((0,_history.recordCommand)(history,command));}},{key:"_addHeaderOutput",value:function _addHeaderOutput(state,commandStr){var envVariables=state.getEnvVariables();var cwd=(0,_environmentVariables.getEnvironmentVariable)(envVariables,'cwd');return this._addCommandOutputs(state,[(0,_outputFactory.makeHeaderOutput)(cwd,commandStr)]);}/**
      * Appends outputs to the internal state of outputs
      * @param {List} outputs list of outputs
      */},{key:"_addCommandOutputs",value:function _addCommandOutputs(state,outputs){var _iterator4=_createForOfIteratorHelper(outputs),_step4;try{for(_iterator4.s();!(_step4=_iterator4.n()).done;){var output=_step4.value;var _outputs=state.getOutputs();state=state.setOutputs(_outputs.push(output));}}catch(err){_iterator4.e(err);}finally{_iterator4.f();}return state;}}]);return Emulator;}();exports["default"]=Emulator;module.exports=exports.default;/***/},/***/"./src/emulator/plugins/BoundedHistoryIterator.js":/*!********************************************************!*\
@@ -8505,7 +8506,8 @@ function (_Component) {
     var _this;
 
     var _emulatorState = _ref.emulatorState,
-        _inputStr = _ref.inputStr;
+        _inputStr = _ref.inputStr,
+        errorStr = _ref.errorStr;
 
     _classCallCheck(this, Terminal);
 
@@ -8526,7 +8528,8 @@ function (_Component) {
 
     _this.state = {
       emulatorState: _emulatorState,
-      inputStr: _inputStr
+      inputStr: _inputStr,
+      errorStr: errorStr
     };
     return _this;
   }
@@ -8535,10 +8538,12 @@ function (_Component) {
     key: "_init",
     value: function _init(props) {
       var emulatorState = props.emulatorState,
-          inputStr = props.inputStr;
+          inputStr = props.inputStr,
+          errorStr = props.errorStr;
       this.setState({
         emulatorState: emulatorState,
-        inputStr: inputStr
+        inputStr: inputStr,
+        errorStr: errorStr
       });
     }
   }, {
@@ -8564,12 +8569,14 @@ function (_Component) {
 
       var _this$state = this.state,
           emulatorState = _this$state.emulatorState,
-          inputStr = _this$state.inputStr; // We're using the spread operator to pass along all props to the child componentm
+          inputStr = _this$state.inputStr,
+          errorStr = _this$state.errorStr; // We're using the spread operator to pass along all props to the child componentm
       // except for emulatorState and inputStr which must come from the state.
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ReactTerminalStateless__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({}, otherProps, {
         emulatorState: emulatorState,
         inputStr: inputStr,
+        errorStr: errorStr,
         onInputChange: this._onInputChange,
         onStateChange: this._onStateChange
       }));
@@ -8661,9 +8668,10 @@ function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "_submitInput", function (commandStr) {
       var _this$props = _this.props,
           onStateChange = _this$props.onStateChange,
-          emulatorState = _this$props.emulatorState;
+          emulatorState = _this$props.emulatorState,
+          errorStr = _this$props.errorStr;
 
-      var newState = _this.emulator.execute(emulatorState, commandStr, _this.plugins);
+      var newState = _this.emulator.execute(emulatorState, commandStr, _this.plugins, errorStr);
 
       onStateChange(newState);
     });

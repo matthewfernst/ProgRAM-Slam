@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -10,6 +10,8 @@ const App = () =>
 {
     const [bootingUp, setBootingUp] = useState(true);
     const [darkMode, setDarkMode] = useState(true);
+
+    const firstRender = useRef(true);
 
     const theme = React.useMemo(
         () =>
@@ -25,7 +27,18 @@ const App = () =>
 
     useEffect(() =>
     {
-        document.getElementById("root").style.backgroundColor = darkMode ? "#141313" : "#FCFCFC";
+        if (!firstRender.current)
+        {
+            console.log("Here");
+
+            document.getElementById("root").setAttribute('style', `background-color: ${darkMode ? '#141313' : '#FCFCFC'} !important`);
+            document.body.setAttribute('style', `background-color: ${darkMode ? '#141313' : '#FCFCFC'} !important`);
+        }
+
+        else
+        {
+            firstRender.current = false;
+        }
     }, [darkMode])
 
 

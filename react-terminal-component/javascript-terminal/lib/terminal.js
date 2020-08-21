@@ -13173,15 +13173,17 @@ var makeRunnerErrorOutput = function makeRunnerErrorOutput(errorType) {
  * @param  {Map}    commandMapping command mapping from emulator state
  * @param  {string} commandName    name of command to run
  * @param  {array}  commandArgs    commands to provide to the command function
- * @param  {function}  notFoundCallback a default function to be run if no command is found
+ * @param  {string} errorString    a default string to be printed if no command is found
  * @return {object}                outputs and/or new state of the emulator
  */
 
 
 var run = function run(commandMapping, commandName, commandArgs) {
-  var notFoundCallback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function () {
+  var errorString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _emulatorError.emulatorErrorType.COMMAND_NOT_FOUND;
+
+  var notFoundCallback = function notFoundCallback() {
     return {
-      output: makeRunnerErrorOutput(_emulatorError.emulatorErrorType.COMMAND_NOT_FOUND)
+      output: makeRunnerErrorOutput(errorString)
     };
   };
 
@@ -13224,7 +13226,7 @@ exports.makeError = exports.emulatorErrorType = void 0;
  * @type {Object}
  */
 var emulatorErrorType = {
-  COMMAND_NOT_FOUND: "Looks Like That Command Isn't Valid. Try 'help' For More Information.",
+  COMMAND_NOT_FOUND: 'Command not found',
   UNEXPECTED_COMMAND_FAILURE: 'An Unknown Command Error Occurred'
 };
 /**
@@ -13384,10 +13386,12 @@ var Emulator = /*#__PURE__*/function () {
      * @param  {EmulatorState}  state                   emulator state before running command
      * @param  {string}         str                     command string to execute
      * @param  {Array}          [executionListeners=[]] list of plugins to notify while running the command
+     * @param  {string}         errorString             error string to print on command failure
      * @return {EmulatorState}                          updated emulator state after running command
      */
     value: function execute(state, str) {
       var executionListeners = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+      var errorString = arguments.length > 3 ? arguments[3] : undefined;
 
       var _iterator = _createForOfIteratorHelper(executionListeners),
           _step;
@@ -13403,7 +13407,6 @@ var Emulator = /*#__PURE__*/function () {
         _iterator.f();
       }
 
-      ;
       state = this._addHeaderOutput(state, str);
 
       if (str.trim() === '') {
@@ -13411,7 +13414,7 @@ var Emulator = /*#__PURE__*/function () {
         state = this._addCommandOutputs(state, [(0, _outputFactory.makeTextOutput)('')]);
       } else {
         state = this._addCommandToHistory(state, str);
-        state = this._updateStateByExecution(state, str);
+        state = this._updateStateByExecution(state, str, errorString);
       }
 
       var _iterator2 = _createForOfIteratorHelper(executionListeners),
@@ -13429,12 +13432,11 @@ var Emulator = /*#__PURE__*/function () {
         _iterator2.f();
       }
 
-      ;
       return state;
     }
   }, {
     key: "_updateStateByExecution",
-    value: function _updateStateByExecution(state, commandStrToExecute) {
+    value: function _updateStateByExecution(state, commandStrToExecute, errorString) {
       var _iterator3 = _createForOfIteratorHelper((0, _commandParser["default"])(commandStrToExecute)),
           _step3;
 
@@ -13446,7 +13448,7 @@ var Emulator = /*#__PURE__*/function () {
           var commandMapping = state.getCommandMapping();
           var commandArgs = [state, commandOptions];
 
-          var _CommandRunner$run = CommandRunner.run(commandMapping, commandName, commandArgs),
+          var _CommandRunner$run = CommandRunner.run(commandMapping, commandName, commandArgs, errorString),
               nextState = _CommandRunner$run.state,
               output = _CommandRunner$run.output,
               outputs = _CommandRunner$run.outputs;
