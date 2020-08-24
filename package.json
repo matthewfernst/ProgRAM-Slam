@@ -6,7 +6,7 @@
     "start": "npm run build-js-terminal && npm run build-react-terminal && webpack-dev-server -d",
     "build-js-terminal": "cd react-terminal-component/javascript-terminal && yarn install && yarn build && cd ../..",
     "build-react-terminal": "cd react-terminal-component && yarn install && yarn build && cd ..",
-    "build": "npm run build-js-terminal && npm run build-react-terminal && webpack -p"
+    "build": "npm run build-js-terminal && npm run build-react-terminal && webpack -p  && cp CNAME dist"
   },
   "author": "Max Rosoff",
   "license": "MIT",
