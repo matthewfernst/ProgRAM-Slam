@@ -44,13 +44,6 @@ const Terminal = props =>
 				},
 				'optDef': {}
 			},
-			'alternate': {
-				'function': (state, opts) =>
-				{
-					return { output: OutputFactory.makeTextOutput("Let's get Crack-a-Hacking!") };
-				},
-				'optDef': {}
-			},
 			'discord': {
 				'function': (state, opts) =>
 				{

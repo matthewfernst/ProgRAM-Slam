@@ -11213,7 +11213,7 @@ var fileToImageOutput = function fileToImageOutput(fs, filePath) {
     return OutputFactory.makeErrorOutput(err);
   }
 
-  var jsxElement = _react["default"].createElement("img", {
+  var jsxElement = /*#__PURE__*/_react["default"].createElement("img", {
     src: file.get('content'),
     style: {
       width: "auto",
@@ -11223,7 +11223,7 @@ var fileToImageOutput = function fileToImageOutput(fs, filePath) {
   });
 
   if (filePath.match(new RegExp('\.(mov|mp4)$', 'g'))) {
-    jsxElement = _react["default"].createElement("iframe", {
+    jsxElement = /*#__PURE__*/_react["default"].createElement("iframe", {
       width: "640",
       height: "360",
       frameBorder: "0",
