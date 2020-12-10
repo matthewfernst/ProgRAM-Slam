@@ -4,7 +4,7 @@
 
 ## About Project
 
-This site is built using React.js. Check out our live deploy [here](prog-ram-slam.com).
+This site is built using React.js. Check out our live deploy [here](https://prog-ram-slam.com).
 
 ## Installation
 
